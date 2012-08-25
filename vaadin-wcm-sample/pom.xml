@@ -1,0 +1,193 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <artifactId>vaadin-wcm-parent</artifactId>
+        <groupId>ar.mmonti</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>vaadin-wcm-sample</artifactId>
+    <packaging>war</packaging>
+
+    <name>vaadin-org.mmonti.wcm-sample</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>ar.mmonti</groupId>
+            <artifactId>vaadin-wcm</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>compile-widgetset</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>gwt-maven-plugin</artifactId>
+                        <version>${gwt.plugin.version}</version>
+                        <configuration>
+                            <webappDirectory>${project.basedir}/src/main/webapp/VAADIN/widgetsets
+                            </webappDirectory>
+                            <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                            <runTarget>cpe-admin</runTarget>
+                            <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+                            <noServer>true</noServer>
+                            <port>8080</port>
+                            <compileReport>false</compileReport>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resources</goal>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.google.gwt</groupId>
+                                <artifactId>gwt-dev</artifactId>
+                                <version>${gwt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.google.gwt</groupId>
+                                <artifactId>gwt-user</artifactId>
+                                <version>${gwt.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>1.0.2</version>
+                        <executions>
+                            <execution>
+                                <configuration/>
+                                <goals>
+                                    <goal>update-widgetset</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <!-- Workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=6397 -->
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.4.1</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.basedir}/src/main/webapp/VAADIN/</directory>
+                                    <includes>
+                                        <directory>gwt-unitCache/**</directory>
+                                    </includes>
+                                    <followSymlinks>false</followSymlinks>
+                                </fileset>
+                            </filesets>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>vaadin-org.mmonti.wcm-sample</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwt.plugin.version}</version>
+                <configuration>
+                    <webappDirectory>${project.basedir}/src/main/webapp/VAADIN/widgetsets
+                    </webappDirectory>
+                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                    <runTarget>cpe-admin</runTarget>
+                    <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+                    <noServer>true</noServer>
+                    <port>8080</port>
+                    <compileReport>false</compileReport>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>resources</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.gwt</groupId>
+                        <artifactId>gwt-dev</artifactId>
+                        <version>${gwt.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.google.gwt</groupId>
+                        <artifactId>gwt-user</artifactId>
+                        <version>${gwt.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <executions>
+                    <execution>
+                        <configuration/>
+                        <goals>
+                            <goal>update-widgetset</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!-- Workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=6397 -->
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/src/main/webapp/VAADIN/</directory>
+                            <includes>
+                                <directory>gwt-unitCache/**</directory>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
