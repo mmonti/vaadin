@@ -1,5 +1,6 @@
 package ar.mmonti.wcm.ui.impl;
 
+import ar.mmonti.wcm.spring.InitializeWindowBeanPostProcessor;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.EventBus;
 import com.vaadin.Application;
@@ -44,6 +45,7 @@ public class WindowManagerImpl implements WindowManager {
         this.eventSupport = new EventSupportImpl(new EventBus());
         this.eventSupport.registerEventHandler(new WindowManagerEventHandlerImpl(this));
 
+        this.componentFactoryBean.registerPostProcessor(new InitializeWindowBeanPostProcessor());
         this.componentFactoryBean.registerPostProcessor(new EventSupportBeanPostProcessor(this.eventSupport));
 
         this.registeredWindows = new ConcurrentHashMap<Class<? extends Window>, Window>();
@@ -72,7 +74,7 @@ public class WindowManagerImpl implements WindowManager {
                 this.registeredWindows.put(windowClassRef, windowInstance);
             }
 
-            ((WindowLifecycle) windowInstance).instantiated();
+            ((WindowLifecycle) windowInstance).initializeView();
         }
         return windowInstance;
     }

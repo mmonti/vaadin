@@ -1,4 +1,6 @@
-package ar.mmonti.wcm.ui;
+package ar.mmonti.wcm.support;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author: mmonti

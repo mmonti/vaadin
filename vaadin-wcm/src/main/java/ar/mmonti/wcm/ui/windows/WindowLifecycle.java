@@ -6,13 +6,18 @@ package ar.mmonti.wcm.ui.windows;
 public interface WindowLifecycle {
 
     /**
-     * * Called each time that a Window is retrieved from the WindowManager registry.
+     * Called each time that a Window is retrieved using the bean factory (new instance created).
      */
-    void loaded();
+    void initializeWindow();
 
     /**
      * Called each time that a Window is retrieved using the bean factory (new instance created).
      */
-    void instantiated();
+    void initializeView();
+
+    /**
+     * * Called each time that a Window is retrieved from the WindowManager registry.
+     */
+    void loaded();
 
 }

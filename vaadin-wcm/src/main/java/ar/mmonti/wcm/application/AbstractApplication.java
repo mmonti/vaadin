@@ -23,4 +23,5 @@ public abstract class AbstractApplication extends Application {
     public WindowManager getWindowManager() {
         return windowManager;
     }
+
 }
