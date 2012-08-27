@@ -13,7 +13,7 @@ import com.vaadin.ui.*;
 public class CompositeSplitPanelWindow extends AbstractWindow {
 
     @Override
-    public void instantiated() {
+    public void initializeWindow() {
         final Layout leftContent = new VerticalLayout();
         leftContent.addComponent(new Label("Left Component"));
         leftContent.setWidth(Dimensions.VALUE_250, Sizeable.UNITS_PIXELS);

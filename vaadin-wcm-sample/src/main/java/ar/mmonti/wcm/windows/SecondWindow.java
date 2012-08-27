@@ -8,10 +8,4 @@ import com.vaadin.ui.Label;
  */
 public class SecondWindow extends AbstractWindow {
 
-    @Override
-    public void instantiated() {
-        setCaption("Second Window");
-        addComponent(new Label("Second Window."));
-    }
-
 }

@@ -15,7 +15,19 @@
         <beans:property name="windowManager" ref="windowManager"/>
     </beans:bean>
 
-    <beans:bean class="ar.mmonti.wcm.windows.FirstWindow" scope="prototype"/>
-    <beans:bean class="ar.mmonti.wcm.windows.SecondWindow" scope="prototype"/>
+    <beans:bean class="ar.mmonti.wcm.windows.LoginWindow" scope="prototype">
+        <beans:property name="view" ref="loginView"/>
+    </beans:bean>
+
+    <beans:bean class="ar.mmonti.wcm.windows.FirstWindow" scope="prototype">
+        <beans:property name="view" ref="loginView"/>
+    </beans:bean>
+
+    <beans:bean class="ar.mmonti.wcm.windows.SecondWindow" scope="prototype">
+        <beans:property name="view" ref="myApplicationView"/>
+    </beans:bean>
+
+    <beans:bean id="loginView" class="ar.mmonti.wcm.views.LoginView" scope="prototype"/>
+    <beans:bean id="myApplicationView" class="ar.mmonti.wcm.views.MyApplicationView" scope="prototype"/>
 
 </beans:beans>
